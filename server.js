@@ -42,5 +42,7 @@ function getAll(req, res) {
 
 // Post Route
 function postData(req, res) {
-    res.send("POST route")
+    const { temperature, date, userResponse, } = req.body;
+    projectData = { temperature, date, userResponse };
+    res.json({ message: 'Success' });
 }
