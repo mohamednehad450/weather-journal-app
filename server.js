@@ -37,7 +37,7 @@ app.post('/post', postData)
 
 // Callback function to complete GET '/all'
 function getAll(req, res) {
-    res.send("GET route");
+    res.json(projectData);
 }
 
 // Post Route
