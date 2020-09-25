@@ -44,7 +44,20 @@ async function postEntry(weather) {
 
 /* Function to GET Project Data */
 async function getProjectData() {
-    console.log('Getting Project Data');
+    try {
+        const response = await fetch('/all');
+
+        if (response.ok) {
+            const resutls = await response.json();
+            updateUI(resutls);
+        }
+        else {
+            throw new Error(`${response.status}: ${response.statusText}`);
+        }
+
+    } catch (error) {
+        alert(error.message);
+    }
 }
 
 
@@ -71,4 +84,17 @@ const postData = async (url = '', data = {}) => {
     } catch (error) {
         alert(error.message);
     }
+}
+
+
+// Helper: updates the UI with the new entry
+function updateUI(entry) {
+    const date = document.querySelector("#date");
+    const content = document.querySelector("#content");
+    const temp = document.querySelector("#temp");
+
+    const d = new Date(entry.date);
+    date.innerHTML = d.toLocaleString();
+    temp.innerHTML = `Temperature: ${entry.temperature}C`;
+    content.innerHTML = entry.userResponse && `Content:\n${entry.userResponse}`.replace(/\n/g, "<br>");
 }
