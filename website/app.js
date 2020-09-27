@@ -11,7 +11,7 @@ function generateHandler(e) {
     const zip = document.querySelector('#zip').value;
     getWeather(baseURL, zip, apiKey)
         .then(postEntry)
-        .then(getProjectData)
+        .then(getProjectData);
 }
 
 /* Function to GET Web API Data*/
